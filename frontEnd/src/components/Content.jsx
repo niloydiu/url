@@ -53,7 +53,7 @@ const Content = () => {
     <div className=" w-full flex flex-col gap-2">
       {data &&
         data.map((url, index) => {
-          const shortUrl = url.customUrl || url.defaultId; // Add this line
+          const shortUrl = url.customUrl || url.defaultId;
           return (
             <div
               key={index}
