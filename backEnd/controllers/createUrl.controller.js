@@ -3,9 +3,12 @@ import URL from "../models/url.model.js";
 export const createUrl = async (req, res) => {
   try {
     const { customUrl, originalUrl } = req.body;
-    const finalCustomUrl = customUrl
-      ? `https://url-three-sand.vercel.app/${customUrl}`
-      : "";
+    const finalCustomUrl =
+      customUrl && customUrl.startsWith("http")
+        ? customUrl
+        : customUrl
+        ? `https://url-three-sand.vercel.app/${customUrl}`
+        : "";
     const newUrl = new URL({ customUrl: finalCustomUrl, originalUrl });
     const savedUrl = await newUrl.save();
     res.status(201).json({
