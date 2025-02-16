@@ -77,7 +77,7 @@ const Content = () => {
                   className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
                   href=""
                 >
-                  {url.customUrl}
+                  {"https://url-three-sand.vercel.app/" + url.customUrl}
                 </a>
               </div>
               <button

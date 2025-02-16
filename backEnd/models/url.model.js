@@ -3,14 +3,14 @@ import { nanoid } from "nanoid";
 
 const urlSchema = new Schema(
   {
+    originalUrl: {
+      type: String,
+      required: true,
+    },
     customUrl: {
       type: String,
       required: true,
       unique: true,
-    },
-    originalUrl: {
-      type: String,
-      required: true,
     },
     defaultId: {
       type: String,
