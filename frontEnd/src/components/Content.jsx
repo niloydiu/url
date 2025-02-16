@@ -188,7 +188,7 @@ const Content = () => {
                   </a>
                 </div>
                 <button
-                  className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer"
+                  className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600 focus:bg-blue-700"
                   onClick={() => handleCopy(url.originalUrl)} // Removed index parameter
                 >
                   Copy
@@ -205,7 +205,7 @@ const Content = () => {
                   </a>
                 </div>
                 <button
-                  className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer"
+                  className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600 focus:bg-blue-700"
                   onClick={
                     () =>
                       handleCopy(
@@ -216,7 +216,7 @@ const Content = () => {
                   Copy
                 </button>
                 <button
-                  className=" text-white text-sm px-2 py-1 bg-red-400 rounded-md cursor-pointer"
+                  className=" text-white text-sm px-2 py-1 bg-red-400 rounded-md cursor-pointer hover:bg-red-500 focus:bg-red-600"
                   onClick={() => handleDelete(shortUrl)}
                 >
                   delete
