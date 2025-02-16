@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="w-full flex justify-center items-center p-2 text-white">
+    <div className="w-full flex justify-center items-center p-2 text-white text-xs">
       <span>All rights reserved by &nbsp; </span>
       <a
         className="  cursor-pointer font-semibold"

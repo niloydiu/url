@@ -1,8 +1,29 @@
+import { useEffect, useState } from "react";
+
 const Content = () => {
-  const repeatCount = 10;
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const res = await fetch("https://url-three-sand.vercel.app/all");
+    const jsonData = await res.json();
+    setData(jsonData);
+  };
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Copied to clipboard!");
+    } catch (error) {
+      console.error("Copy failed", error);
+    }
+  };
+
   return (
     <div className=" w-full flex flex-col gap-2">
-      {Array.from({ length: repeatCount }).map((_, index) => (
+      {data.map((url, index) => (
         <div
           key={index}
           className=" bg-blue-400 p-2 flex flex-col gap-2 rounded-lg"
@@ -13,14 +34,13 @@ const Content = () => {
                 className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
                 href=""
               >
-                lxcvbklkjhgckljhgvklkjhgfvvjkjhgfvvjkjhggjkjhghjkjh Lorem ipsum
-                dolor sit amet consectetur adipisicing elit. Blanditiis cum
-                voluptatem tenetur, excepturi possimus repudiandae distinctio
-                quidem! Accusamus, ullam, id illo iusto, reprehenderit amet
-                inventore est beatae quaerat enim impedit.lorm
+                {url.originalUrl}
               </a>
             </div>
-            <button className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md">
+            <button
+              className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md"
+              onClick={() => handleCopy(url.originalUrl)}
+            >
               copy
             </button>
           </div>
@@ -30,10 +50,13 @@ const Content = () => {
                 className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
                 href=""
               >
-                jkjhggjkjhgh
+                {url.customUrl}
               </a>
             </div>
-            <button className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md">
+            <button
+              className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md"
+              onClick={() => handleCopy(url.customUrl)}
+            >
               copy
             </button>
             <button className=" text-white text-sm px-2 py-1 bg-red-400 rounded-md">

@@ -16,7 +16,7 @@ const SearchBar = () => {
           value={searchData.originUrl}
           onChange={handleChange}
           type="text"
-          placeholder="Enter the url: "
+          placeholder="Enter the original url: "
           className=" p-2 rounded-lg w-[90%] border border-white outline-none text-white"
         />
         <input
@@ -24,7 +24,7 @@ const SearchBar = () => {
           value={searchData.shotUrl}
           onChange={handleChange}
           type="text"
-          placeholder="Enter your custom url name: (optional)"
+          placeholder="Custom url or text (optional):"
           className=" p-2 rounded-lg w-[90%] border border-white outline-none text-purple-100"
         />
         <button type="submit" className=" py-2 px-4 rounded-xl bg-white">

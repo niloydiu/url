@@ -3,8 +3,9 @@ import URL from "../models/url.model.js";
 export const getAllUrls = async (req, res) => {
   try {
     const urls = await URL.find({});
-    res.status(200).json(urls);
+    res.status(200).json({ success: true, data: urls });
   } catch (error) {
-    res.status(500).json({ message: "Failed to get all URLs" });
+    console.error("Error fetching URLs: ", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

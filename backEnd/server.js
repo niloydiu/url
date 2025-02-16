@@ -2,7 +2,7 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import { connectDB } from "./configs/connectDB.config.js";
-import { url } from "./routes/url.route.js";
+import { redirecto } from "./routes/redirect.route.js";
 
 await connectDB();
 
@@ -13,10 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("hey buddy!");
+  res.send("Base route is working fine!");
 });
 
-app.use("/api/url", url);
+app.use("/", redirecto);
 
 app.listen(port, () => {
   console.log(`Server listening on ${port}`);
