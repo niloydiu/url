@@ -15,7 +15,7 @@ const Content = () => {
   const handleCopy = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      alert("Copied to clipboard!");
+      // alert("Copied to clipboard!");
     } catch (error) {
       console.error("Copy failed", error);
     }
@@ -59,7 +59,8 @@ const Content = () => {
               <div className="overflow-x-auto whitespace-nowrap hide-scrollbar rounded-lg">
                 <a
                   className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
-                  href=""
+                  href={url.originalUrl}
+                  target="_blank"
                 >
                   {url.originalUrl}
                 </a>
@@ -75,14 +76,19 @@ const Content = () => {
               <div className="overflow-x-auto whitespace-nowrap hide-scrollbar rounded-lg">
                 <a
                   className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
-                  href=""
+                  href={"https://url-three-sand.vercel.app/" + url.customUrl}
+                  target="_blank"
                 >
                   {"https://url-three-sand.vercel.app/" + url.customUrl}
                 </a>
               </div>
               <button
                 className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer"
-                onClick={() => handleCopy(url.customUrl)}
+                onClick={() =>
+                  handleCopy(
+                    "https://url-three-sand.vercel.app/" + url.customUrl
+                  )
+                }
               >
                 copy
               </button>
