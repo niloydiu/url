@@ -4,7 +4,7 @@ const Footer = () => {
       <span>All rights reserved by &nbsp; </span>
       <a
         className="  cursor-pointer font-semibold"
-        href="https://portfolio-nu-ten-59.vercel.app/"
+        href="https://niloykm.vercel.app/"
         target="_blank"
       >
         &copy;niloy

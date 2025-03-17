@@ -4,7 +4,7 @@ function Header() {
   return (
     <div className="w-full  mx-auto py-1 mt-2 px-[5vw]">
       <div className=" w-full flex justify-between items-center">
-        <a href="https://portfolio-nu-ten-59.vercel.app/" target="_blank">
+        <a href="https://niloykm.vercel.app/" target="_blank">
           <img
             src={logo}
             alt=""
@@ -13,7 +13,7 @@ function Header() {
         </a>
         <h1 className=" font-semibold text-white">URL Shortener</h1>
         <h1 className="hidden sm:block font-extrabold text-3xl text-white">
-          <a href="https://portfolio-nu-ten-59.vercel.app/" target="_blank">
+          <a href="https://niloykm.vercel.app/" target="_blank">
             NewRL
           </a>
         </h1>
