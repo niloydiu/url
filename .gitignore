@@ -1,0 +1,30 @@
+# Root gitignore for monorepo
+
+# Node
+node_modules/
+
+# Env files
+.env
+.env.*
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+
+# Editor folders
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+
+# Ignore node modules in subprojects explicitly
+/backEnd/node_modules/
+/frontEnd/node_modules/
