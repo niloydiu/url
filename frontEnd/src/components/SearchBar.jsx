@@ -1,5 +1,8 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../contexts/MyContext";
+import Modal from "./Modal";
+
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 
 const SearchBar = () => {
   const { searchData, setSearchData } = useContext(MyContext);
@@ -16,28 +19,68 @@ const SearchBar = () => {
       originalUrl: searchData.originUrl,
     };
     try {
-      const response = await fetch("https://url-three-sand.vercel.app/create", {
+      const response = await fetch(`${API_BASE}/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const result = await response.json();
-      if (result.success) {
-        alert("URL created successfully");
+      let result;
+      try {
+        result = await response.json();
+      } catch (err) {
+        const text = await response.text();
+        console.error("Non-JSON response from server:", text);
+        throw new Error(
+          `Server error: ${response.status} ${response.statusText} - ${text}`
+        );
+      }
+
+      if (result && result.success) {
+        openModal("Success", "URL created successfully", "success");
         setSearchData({ originUrl: "", shotUrl: "" });
-        window.location.reload();
+        // reload removed — UI updates can be done without full reload
       } else {
-        alert(result.message);
+        openModal(
+          "Create failed",
+          result.message || "Failed to create URL",
+          "error"
+        );
       }
     } catch (error) {
       console.log("Error creating URL: ", error);
-      alert("Failed to create URL");
+      openModal(
+        "Request error",
+        error.message || "Failed to create URL",
+        "error"
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("info");
+
+  const openModal = (title, message, type = "info") => {
+    setModalTitle(title);
+    setModalMessage(message);
+    setModalType(type);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => setModalOpen(false);
   return (
     <div className=" w-full p-2">
+      <Modal
+        open={modalOpen}
+        onClose={closeModal}
+        title={modalTitle}
+        message={modalMessage}
+        type={modalType}
+      />
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center pt-8 gap-2"

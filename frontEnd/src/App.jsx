@@ -14,7 +14,7 @@ const App = () => {
       <main className="flex-grow overflow-auto flex justify-center mx-auto w-[90vw]  pb-10">
         <Content />
       </main>
-      <footer className="fixed bottom-0 left-0 w-full  text-white p-0 bg-white/5 backdrop-blur-md">
+      <footer className="w-full text-white p-4 bg-white/5 backdrop-blur-md mt-auto">
         <Footer />
       </footer>
     </div>

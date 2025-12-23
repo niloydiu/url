@@ -4,16 +4,20 @@ function Header() {
   return (
     <div className="w-full  mx-auto py-1 mt-2 px-[5vw]">
       <div className=" w-full flex justify-between items-center">
-        <a href="https://niloykm.vercel.app/" target="_blank">
+        <a href="https://niloykm.vercel.app/" target="_blank" rel="noreferrer">
           <img
             src={logo}
-            alt=""
+            alt="NewRL logo"
             className=" h-10 w-auto bg-white rounded-full p-2"
           />
         </a>
         <h1 className=" font-semibold text-white">URL Shortener</h1>
         <h1 className="hidden sm:block font-extrabold text-3xl text-white">
-          <a href="https://niloykm.vercel.app/" target="_blank">
+          <a
+            href="https://niloykm.vercel.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
             NewRL
           </a>
         </h1>

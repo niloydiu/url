@@ -1,11 +1,9 @@
-import URL from "../models/url.model.js";
+import { findByIdentifier } from "../services/url.service.js";
 
 export const redirectUrl = async (req, res) => {
   const { customUrl } = req.params; // Parameter from the URL (could be customUrl or defaultId)
   try {
-    const urlFound = await URL.findOne({
-      $or: [{ customUrl: customUrl }, { defaultId: customUrl }],
-    });
+    const urlFound = await findByIdentifier(customUrl);
     if (urlFound) {
       return res.redirect(urlFound.originalUrl);
     }

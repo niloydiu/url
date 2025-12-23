@@ -115,6 +115,9 @@
 // export default Content;
 
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
+
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 
 const Content = () => {
   const [data, setData] = useState([]);
@@ -124,7 +127,7 @@ const Content = () => {
   }, []);
 
   const fetchData = async () => {
-    const res = await fetch("https://url-three-sand.vercel.app/all");
+    const res = await fetch(`${API_BASE}/all`);
     const jsonData = await res.json();
     setData(jsonData.data);
   };
@@ -136,22 +139,19 @@ const Content = () => {
       // Removed copiedIndex logic
     } catch (error) {
       console.error("Copy failed", error);
+      openModal("Copy failed", String(error), "error");
     }
   };
 
   const handleDelete = async (identifier) => {
     try {
-      const res = await fetch(
-        `https://url-three-sand.vercel.app/${identifier}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`${API_BASE}/${identifier}`, {
+        method: "DELETE",
+      });
       const result = await res.json();
 
       if (result.success) {
-        alert("Deleted successfully!");
-        window.location.reload();
+        openModal("Deleted", "Deleted successfully!", "success");
 
         setData(
           data.filter((url) => {
@@ -159,16 +159,42 @@ const Content = () => {
           })
         );
       } else {
-        alert(result.message);
+        openModal(
+          "Delete failed",
+          result.message || "Failed to delete",
+          "error"
+        );
       }
     } catch (error) {
       console.log("Delete failed", error);
-      alert("Error deleting the url");
+      openModal("Request error", String(error), "error");
     }
   };
 
+  // Modal state for Content
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("info");
+
+  const openModal = (title, message, type = "info") => {
+    setModalTitle(title);
+    setModalMessage(message);
+    setModalType(type);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => setModalOpen(false);
+
   return (
     <div className=" w-full flex flex-col gap-2">
+      <Modal
+        open={modalOpen}
+        onClose={closeModal}
+        title={modalTitle}
+        message={modalMessage}
+        type={modalType}
+      />
       {data &&
         data.map((url, index) => {
           const shortUrl = url.customUrl || url.defaultId;
@@ -183,6 +209,7 @@ const Content = () => {
                     className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
                     href={url.originalUrl}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     {url.originalUrl}
                   </a>
@@ -198,19 +225,17 @@ const Content = () => {
                 <div className="overflow-x-auto whitespace-nowrap hide-scrollbar rounded-lg">
                   <a
                     className="bg-blue-200 inline-block text-sm px-2 py-1 text-blue-700"
-                    href={"https://url-three-sand.vercel.app/" + shortUrl}
+                    href={`${API_BASE}/${shortUrl}`}
                     target="_blank"
+                    rel="noreferrer"
                   >
-                    {"https://url-three-sand.vercel.app/" + shortUrl}
+                    {`${API_BASE}/${shortUrl}`}
                   </a>
                 </div>
                 <button
                   className=" text-white text-sm px-2 py-1 bg-blue-500 rounded-md cursor-pointer hover:bg-blue-600 focus:bg-blue-700"
                   onClick={
-                    () =>
-                      handleCopy(
-                        "https://url-three-sand.vercel.app/" + shortUrl
-                      ) // Removed index parameter
+                    () => handleCopy(`${API_BASE}/${shortUrl}`) // Removed index parameter
                   }
                 >
                   Copy
